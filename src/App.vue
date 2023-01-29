@@ -1,26 +1,100 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div v-if="data">
+    <EstimateHeader v-bind:info="data.info" />
+    <EstimateBody v-bind:contents="data.contents.data" />
+    <EstimateLink v-bind:link="data.contents.link" />
+    <EstimateNote v-bind:notes="data.notes" />
+  </div>
+
+  <div class="inner">
+    <vue3-html2pdf
+      :show-layout="false"
+      :float-layout="true"
+      :enable-download="true"
+      :preview-modal="false"
+      :paginate-elements-by-height="1400"
+      filename="견적서"
+      :pdf-quality="2"
+      :manual-pagination="false"
+      pdf-format="a4"
+      pdf-orientation="portrait"
+      pdf-content-width="800px"
+      ref="html2Pdf"
+    >
+      <template v-slot:pdf-content>
+        <div v-if="data">
+          <EstimateHeader v-bind:info="data.info" />
+          <EstimateBody v-bind:contents="data.contents.data" />
+          <EstimateNote v-bind:notes="data.notes" />
+        </div>
+      </template>
+    </vue3-html2pdf>
+    <div class="btnWrap">
+      <button class="btn" v-on:click="generateReport">
+        견적서 <font-awesome-icon icon="fa-solid fa-download" />
+      </button>
+    </div>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import EstimateHeader from './components/EstimateHeader.vue';
+import EstimateBody from './components/EstimateBody.vue';
+import EstimateLink from './components/EstimateLink.vue';
+import EstimateNote from './components/EstimateNote.vue';
+import axios from 'axios';
+import dummyData from '../datas/dummyData.json';
+import Vue3Html2pdf from 'vue3-html2pdf';
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
-  }
+    EstimateHeader,
+    EstimateBody,
+    EstimateLink,
+    EstimateNote,
+    Vue3Html2pdf,
+  },
+  data() {
+    return {
+      data: null,
+    };
+  },
+  mounted() {
+    if (window.location.href.indexOf('localhost') > -1) {
+      this.data = dummyData;
+    } else {
+      axios({
+        method: 'get',
+        url: `./datas/${getUrlParams().id}.json`,
+      }).then((response) => {
+        if (response.statusText == 'OK') {
+          this.data = response.data;
+        } else {
+          console.error('데이터를 찾을 수 없음');
+        }
+      });
+    }
+  },
+  methods: {
+    generateReport() {
+      this.$refs.html2Pdf.generatePdf();
+    },
+  },
+};
+
+function getUrlParams() {
+  let params = {};
+
+  window.location.search.replace(
+    /[?&]+([^=&]+)=([^&]*)/gi,
+    function (str, key, value) {
+      params[key] = value;
+    }
+  );
+
+  return params;
 }
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+<style lang="scss"></style>

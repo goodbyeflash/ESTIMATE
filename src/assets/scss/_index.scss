@@ -1,0 +1,297 @@
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-family: 'Pretendard', sans-serif;
+  font-size: 62.5%;
+  font-weight: 400;
+}
+
+body {
+  font-size: 1.6rem;
+}
+
+body {
+  font-family: 'Pretendard', sans-serif;
+  font-size: 10px;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+h1 {
+  padding: 3rem 0 1rem;
+  font-size: 2rem;
+  font-weight: 800;
+}
+
+h2 {
+  padding-right: 7rem;
+  font-size: 3.5rem;
+  font-weight: 900;
+  color: #405f98;
+}
+
+h3 {
+  font-size: 2rem;
+}
+
+button {
+  border: 0;
+}
+
+.inner {
+  width: 794px;
+  margin: 0 auto;
+}
+
+.sheetHeader {
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 3rem;
+    right: 0;
+    width: 60px;
+    height: 60px;
+    background: url('../images/logo.png') no-repeat center / contain;
+  }
+}
+
+.information {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  margin-top: 3rem;
+
+  .item {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1.5rem 1rem 1rem;
+    width: 25%;
+
+    p {
+      line-height: 1.2;
+    }
+  }
+
+  h3 {
+    position: relative;
+    margin-bottom: 3rem;
+    padding: 0.5rem;
+    font-size: 1.2rem;
+    font-weight: 900;
+    border-bottom: 2px solid #405f98;
+    color: #405f98;
+  }
+
+  .itemTxt {
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: #666;
+  }
+
+  .totalPrice {
+    font-size: 2.5rem;
+    font-weight: 900;
+    text-align: right;
+    color: #405f98;
+
+    &::before {
+      content: '￦';
+      margin-right: 0.5rem;
+      font-size: 1.6rem;
+      vertical-align: middle;
+    }
+  }
+}
+
+.sheetBody {
+  margin-top: 3rem;
+}
+
+.btnWrap {
+  padding: 1.5rem 0;
+  text-align: right;
+
+  .btn {
+    display: inline-block;
+    padding: 0.8rem 1.5rem;
+    text-decoration: none;
+    font-size: 1.4rem;
+    font-weight: 700;
+    border-radius: 0.6rem;
+    color: #fff;
+    background-color: #405f98;
+    cursor: pointer;
+  }
+}
+
+.detailList {
+  margin-top: 3rem;
+  border-collapse: collapse;
+  width: 100%;
+
+  th,
+  td {
+    padding: 1rem 1.5rem;
+    text-align: center;
+    font-size: 1.3rem;
+
+    &:nth-child(1) {
+      width: 64%;
+      text-align: left;
+    }
+    &:nth-child(2) {
+      width: 12%;
+    }
+    &:nth-child(3) {
+      width: 12%;
+    }
+    &:nth-child(4) {
+      width: 12%;
+    }
+  }
+
+  th {
+    font-weight: 400;
+    background-color: #405f98;
+    color: #fff;
+    border: 1px solid #405f98;
+  }
+
+  td {
+    border-bottom: 1px solid #405f98;
+  }
+}
+
+.sheetFooter {
+  margin-top: 5rem;
+}
+
+.etcList {
+  margin-top: 2rem;
+
+  li {
+    position: relative;
+    padding-left: 1.3rem;
+    font-size: 1.3rem;
+    line-height: 1.5;
+
+    + li {
+      margin-top: 1rem;
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0.3rem;
+      top: 0.8rem;
+      width: 0.3rem;
+      height: 0.3rem;
+      background-color: #405f98;
+      border-radius: 50%;
+    }
+  }
+}
+
+@media screen and (max-width: 1023px) {
+  h1 {
+    font-size: 1.6rem;
+  }
+
+  h2 {
+    font-size: 2.7rem;
+  }
+  .inner {
+    width: 90%;
+  }
+  .information {
+    flex-wrap: wrap;
+
+    .item {
+      width: 50%;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  h1 {
+    padding-top: 5rem;
+  }
+
+  .information {
+    .item {
+      width: 100%;
+      padding: 0 0 1rem;
+      margin-bottom: 2rem;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: end;
+      border-bottom: 2px solid #405f98;
+
+      h3 {
+        padding: 0;
+        margin-bottom: 0;
+        border: 0;
+      }
+    }
+
+    .itemTxt {
+      font-size: 1.3rem;
+    }
+
+    .totalPrice {
+      font-size: 1.7rem;
+    }
+  }
+
+  .sheetBody,
+  .sheetFooter {
+    margin-top: 0;
+
+    h3 {
+      margin-top: 3rem;
+      font-size: 1.8rem;
+      font-weight: 900;
+    }
+  }
+
+  .detailList {
+    margin-top: 1rem;
+
+    th,
+    td {
+      padding: 0.7rem 1rem;
+      text-align: center;
+      font-size: 1.3rem;
+
+      &:nth-child(1) {
+        width: 55%;
+        text-align: left;
+      }
+      &:nth-child(2) {
+        width: 15%;
+      }
+      &:nth-child(3) {
+        width: 15%;
+      }
+      &:nth-child(4) {
+        width: 15%;
+      }
+    }
+  }
+
+  .sheetFooter {
+    padding-bottom: 4rem;
+  }
+}
