@@ -34,9 +34,9 @@
         </div>
 
         <div class="item">
-          <h3>Total(vat포함)</h3>
+          <h3>Total(VAT포함)</h3>
           <p class="totalPrice">
-            {{ new Intl.NumberFormat().format(totalPrice) }}
+            {{ new Intl.NumberFormat().format(totalPrice * 1.1) }}
           </p>
         </div>
       </div>
